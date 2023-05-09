@@ -1,0 +1,44 @@
+[
+  {
+    "level_": 0,
+    "message_": "Start JSON generation. Platform version: 21 min SDK version: arm64-v8a",
+    "file_": "C:\\Users\\Dell\\Documents\\realtime_object_detection-main\\openCV\\libcxx_helper\\CMakeLists.txt",
+    "tag_": "debug|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -570506488
+  },
+  {
+    "level_": 0,
+    "message_": "JSON \u0027C:\\Users\\Dell\\Documents\\realtime_object_detection-main\\openCV\\.cxx\\Debug\\5o3s6n1v\\arm64-v8a\\android_gradle_build.json\u0027 was up-to-date",
+    "file_": "C:\\Users\\Dell\\Documents\\realtime_object_detection-main\\openCV\\libcxx_helper\\CMakeLists.txt",
+    "tag_": "debug|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -378118314
+  },
+  {
+    "level_": 0,
+    "message_": "JSON generation completed without problems",
+    "file_": "C:\\Users\\Dell\\Documents\\realtime_object_detection-main\\openCV\\libcxx_helper\\CMakeLists.txt",
+    "tag_": "debug|arm64-v8a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 532199591
+  }
+]

@@ -20,7 +20,7 @@ import org.tensorflow.lite.support.common.FileUtil
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
-
+import org.opencv.core.Rect2d
 class MainActivity : AppCompatActivity() {
 
     lateinit var labels:List<String>
@@ -37,11 +37,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var textureView: TextureView
     lateinit var model:SsdMobilenetV11Metadata1
 
+    var prevPos: Rect2d? = null
+    var prevTime = System.currentTimeMillis()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         get_permission()
-
         labels = FileUtil.loadLabels(this, "labels.txt")
         imageProcessor = ImageProcessor.Builder().add(ResizeOp(300, 300, ResizeOp.ResizeMethod.BILINEAR)).build()
         model = SsdMobilenetV11Metadata1.newInstance(this)
@@ -82,6 +84,11 @@ class MainActivity : AppCompatActivity() {
                 paint.textSize = h/15f
                 paint.strokeWidth = h/85f
                 var x = 0
+
+                val currentTime = System.currentTimeMillis()
+                var currentPos: Rect2d? = null
+                var speed: Double? = null
+
                 scores.forEachIndexed { index, fl ->
                     x = index
                     x *= 4
@@ -89,21 +96,31 @@ class MainActivity : AppCompatActivity() {
                         val list = listOf("bird", "cat", "dog", "horse", "cow", "elephant", "bear" ,"zebra" ,"giraffe")
                         paint.setColor(colors.get(index))
                         paint.style = Paint.Style.STROKE
-                        canvas.drawRect(RectF(locations.get(x+1)*w, locations.get(x)*h, locations.get(x+3)*w, locations.get(x+2)*h), paint)
+                        val rect = RectF(locations.get(x+1)*w, locations.get(x)*h, locations.get(x+3)*w, locations.get(x+2)*h)
+                        canvas.drawRect(rect, paint)
                         paint.style = Paint.Style.FILL
                         if(list.contains(labels.get(classes.get(index).toInt()) )){
 
-                            canvas.drawText("animal"+" "+fl.toString(), locations.get(x+1)*w, locations.get(x)*h, paint)
+                            canvas.drawText("animal"+" "+fl.toString(), locations.get(x+1)*w, locations.get(x)*h+7, paint)
                         }else{
 
-                            canvas.drawText(labels.get(classes.get(index).toInt())+" "+fl.toString(), locations.get(x+1)*w, locations.get(x)*h, paint)
+                            canvas.drawText(labels.get(classes.get(index).toInt())+" "+fl.toString(), locations.get(x+1)*w, locations.get(x)*h +7, paint)
+                        }
+                        currentPos = Rect2d(rect.left.toDouble(), rect.top.toDouble(), rect.width().toDouble(), rect.height().toDouble())
+                        if (prevPos != null) {
+                            val displacement = Point(currentPos!!.x.toInt() - prevPos!!.x.toInt(), currentPos!!.y.toInt() - prevPos!!.y.toInt())
+                            val timeDiff = (currentTime - prevTime) / 1000.0
+                            speed = Math.sqrt((displacement.x * displacement.x + displacement.y * displacement.y).toDouble()) / timeDiff
+                            speed= speed!! /20.0
+                            canvas.drawText(String.format("%.2f", speed) + " km/h", rect.left, rect.top +100, paint)
                         }
                     }
                 }
 
                 imageView.setImageBitmap(mutable)
 
-
+                prevPos = currentPos
+                prevTime = currentTime
             }
         }
 

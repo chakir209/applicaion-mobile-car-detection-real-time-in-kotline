@@ -1,0 +1,1 @@
+C:\Users\Dell\Documents\realtime_object_detection-main\openCV\build\intermediates\cxx\Debug\5o3s6n1v\obj\arm64-v8a

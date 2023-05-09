@@ -1,0 +1,1 @@
+C:\Users\Dell\Documents\realtime_object_detection-main\openCV\build\intermediates\cxx\RelWithDebInfo\1g3z1v15\obj\x86

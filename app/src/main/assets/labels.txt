@@ -23,7 +23,7 @@ elephant
 bear
 zebra
 giraffe
-???
+??
 backpack
 umbrella
 ???
