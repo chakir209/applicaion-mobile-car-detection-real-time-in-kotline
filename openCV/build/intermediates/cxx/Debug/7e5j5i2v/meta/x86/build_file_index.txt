@@ -1,0 +1,1 @@
+C:\Users\chamk\AndroidStudioProjects\applicaion-mobile-car-detection-real-time-in-kotline\openCV\libcxx_helper\CMakeLists.txt
