@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SigninActivity">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/blueimg"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        >
+    </ImageView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome!"
+        android:layout_gravity="center"
+        android:textSize="30dp"
+        ></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create your account"
+        android:layout_gravity="center"
+        android:textSize="15dp"
+        ></TextView>
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/logousername"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/username2"
+            android:background="@drawable/cercle_design"
+
+            ></ImageView>
+        <EditText
+            android:id="@+id/usernameId"
+            android:layout_marginRight="20dp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="Username"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_text_bg"
+            android:paddingStart="20dp"
+            ></EditText>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/letter"
+            android:background="@drawable/cercle_design"
+
+            ></ImageView>
+        <EditText
+            android:id="@+id/registerUsername"
+            android:layout_marginRight="20dp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="Email"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_text_bg"
+            android:paddingStart="20dp"
+            ></EditText>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/registerPssd"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/mylock"
+            android:background="@drawable/cercle_design"
+
+            ></ImageView>
+        <EditText
+            android:id="@+id/passwordId"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="Password"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_text_bg"
+            android:paddingStart="20dp"
+            ></EditText>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signInBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="50dp"
+        android:textSize="25dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:paddingRight="50dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:background="@drawable/blue_background_button"
+        ></androidx.appcompat.widget.AppCompatButton>
+
+
+
+</LinearLayout>
