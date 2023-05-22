@@ -2,25 +2,34 @@ package com.programminghut.realtime_object
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.graphics.*
 import android.hardware.camera2.CameraCaptureSession
 import android.hardware.camera2.CameraDevice
 import android.hardware.camera2.CameraManager
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
 import android.view.Surface
 import android.view.TextureView
+import android.view.View
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.programminghut.realtime_object.ml.SsdMobilenetV11Metadata1
 import org.tensorflow.lite.support.common.FileUtil
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.opencv.core.Rect2d
+
+
+
+
 class MainActivity : AppCompatActivity() {
 
     lateinit var labels:List<String>
@@ -36,21 +45,30 @@ class MainActivity : AppCompatActivity() {
     lateinit var cameraManager: CameraManager
     lateinit var textureView: TextureView
     lateinit var model:SsdMobilenetV11Metadata1
-
     var prevPos: Rect2d? = null
     var prevTime = System.currentTimeMillis()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         get_permission()
+        // Pour générer une alerte sonore
+        val mediaPlayer = MediaPlayer.create(this,R.raw.attention)
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("Attention !!!")
+            .setMessage("Un obstacle se trouve sur la route.")
+            .create()
+        val imageView1 = ImageView(this)
+        imageView1.setImageResource(R.drawable.iconstop)
+        alertDialog.setView(imageView1)
         labels = FileUtil.loadLabels(this, "labels.txt")
         imageProcessor = ImageProcessor.Builder().add(ResizeOp(300, 300, ResizeOp.ResizeMethod.BILINEAR)).build()
         model = SsdMobilenetV11Metadata1.newInstance(this)
         val handlerThread = HandlerThread("videoThread")
         handlerThread.start()
         handler = Handler(handlerThread.looper)
-
         imageView = findViewById(R.id.imageView)
 
         textureView = findViewById(R.id.textureView)
@@ -78,7 +96,6 @@ class MainActivity : AppCompatActivity() {
 
                 var mutable = bitmap.copy(Bitmap.Config.ARGB_8888, true)
                 val canvas = Canvas(mutable)
-
                 val h = mutable.height
                 val w = mutable.width
                 paint.textSize = h/15f
@@ -102,8 +119,19 @@ class MainActivity : AppCompatActivity() {
                         if(list.contains(labels.get(classes.get(index).toInt()) )){
 
                             canvas.drawText("animal"+" "+fl.toString(), locations.get(x+1)*w, locations.get(x)*h+7, paint)
+                            alertDialog.show()
+                            mediaPlayer.start()
+                            Handler().postDelayed({
+                                alertDialog.dismiss()
+                            }, 5000)
                         }else{
-
+                            if(labels.get(classes.get(index).toInt())=="car"){
+                                alertDialog.show()
+                                mediaPlayer.start()
+                                Handler().postDelayed({
+                                    alertDialog.dismiss()
+                                }, 5000)
+                            }
                             canvas.drawText(labels.get(classes.get(index).toInt())+" "+fl.toString(), locations.get(x+1)*w, locations.get(x)*h +7, paint)
                         }
                         currentPos = Rect2d(rect.left.toDouble(), rect.top.toDouble(), rect.width().toDouble(), rect.height().toDouble())
@@ -111,7 +139,7 @@ class MainActivity : AppCompatActivity() {
                             val displacement = Point(currentPos!!.x.toInt() - prevPos!!.x.toInt(), currentPos!!.y.toInt() - prevPos!!.y.toInt())
                             val timeDiff = (currentTime - prevTime) / 1000.0
                             speed = Math.sqrt((displacement.x * displacement.x + displacement.y * displacement.y).toDouble()) / timeDiff
-                            speed= speed!! /20.0
+                            speed= speed!! /70.0
                             canvas.drawText(String.format("%.2f", speed) + " km/h", rect.left, rect.top +100, paint)
                         }
                     }
