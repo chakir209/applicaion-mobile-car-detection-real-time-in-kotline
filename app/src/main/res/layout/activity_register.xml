@@ -41,16 +41,16 @@
             android:id="@+id/logousername"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/username2"
+            android:src="@drawable/letter"
             android:background="@drawable/cercle_design"
 
             ></ImageView>
         <EditText
-            android:id="@+id/usernameId"
+            android:id="@+id/emailId"
             android:layout_marginRight="20dp"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:hint="Username"
+            android:hint="Type Your Email"
             android:layout_gravity="center"
             android:background="@drawable/edit_text_bg"
             android:paddingStart="20dp"
@@ -66,16 +66,16 @@
             android:layout_marginLeft="10dp"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/letter"
+            android:src="@drawable/mylock"
             android:background="@drawable/cercle_design"
 
             ></ImageView>
         <EditText
-            android:id="@+id/registerUsername"
+            android:id="@+id/passwordId"
             android:layout_marginRight="20dp"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:hint="Email"
+            android:hint="Type Your Password"
             android:layout_gravity="center"
             android:background="@drawable/edit_text_bg"
             android:paddingStart="20dp"
@@ -99,10 +99,10 @@
 
             ></ImageView>
         <EditText
-            android:id="@+id/passwordId"
+            android:id="@+id/passwordIdtwo"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:hint="Password"
+            android:hint="Retype Your Password"
             android:layout_gravity="center"
             android:background="@drawable/edit_text_bg"
             android:paddingStart="20dp"
