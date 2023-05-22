@@ -20,7 +20,8 @@
             android:exported="false" />
         <activity
             android:name=".SigninActivity"
-            android:exported="false" />
+            android:exported="false" >
+        </activity>
         <activity
             android:name=".FirstDetailsActivity"
             android:exported="false" />
